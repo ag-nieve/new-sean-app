@@ -120,7 +120,7 @@ export default function BuyModal(props){
                 placeholder="Quantity per Kilo" 
                 value={quantity}
                 onChangeText={(val)=> {
-                    if(val > selectedProduct.quantity) {
+                    if(parseInt(val) > parseInt(selectedProduct.quantity)) {
                         setError(`Desired quantity is greater than quantity left.`);
                         setQuantity(val)
 
