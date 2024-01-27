@@ -1,7 +1,8 @@
 import { Ionicons } from "@expo/vector-icons";
 import { FlashList } from "@shopify/flash-list";
 import { useEffect, useState } from "react";
-import { Modal, Text, TextInput, View, TouchableOpacity, SafeAreaView } from "react-native";
+import { Modal, Text, TextInput, View, TouchableOpacity, SafeAreaView, Image, ScrollView } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 
 export default function AddProductModal(props){
@@ -12,6 +13,7 @@ export default function AddProductModal(props){
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
     const [category, setCategory] = useState("");
+    const [image, setImage] = useState("");
 
     const [categoryIds, setCategoryIds] = useState([]);
     const [categories, setCategories] = useState();
@@ -36,6 +38,7 @@ export default function AddProductModal(props){
             method: "POST",
             body: JSON.stringify({
                 'name': name,
+                'image': image,
                 'description' : description,
                 'price': price,
                 'category': category,
@@ -51,11 +54,13 @@ export default function AddProductModal(props){
 
         setNewData({
             name: name,
+            image: image,
             description: description,
             price: price,
             category: category,
         });
 
+        setImage("");
         setName("");
         setDescription("");
         setPrice("");
@@ -80,6 +85,15 @@ export default function AddProductModal(props){
             </TouchableOpacity>
         </View>
         <View>
+            <View className={'flex w-full items-center'}>
+                <Image className={'w-full rounded-lg h-44 mb-3'} src={image ? image : 'https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?format=jpg&quality=90&v=1530129081'} />
+            </View>
+            <TextInput 
+                className={'px-4 py-2 rounded-xl w-full border border-gray-100 mb-3'}
+                placeholder="Product Image" 
+                value={image}
+                onChangeText={setImage}            
+            />
             <TextInput 
                 className={'px-4 py-2 rounded-xl w-full border border-gray-100 mb-3'}
                 placeholder="Product Name" 
@@ -106,7 +120,7 @@ export default function AddProductModal(props){
                     <Ionicons name={'refresh'} size={15} />
                 </TouchableOpacity>
             </View>
-            <View className={"h-80 bg-gray-50 px-4 py-4"}>
+            <View className={"h-44 overflow-scroll bg-gray-50 px-4 py-4"}>
             {
                 categoryIds.length > 0 ?
                 <FlashList
@@ -123,11 +137,11 @@ export default function AddProductModal(props){
             <TouchableOpacity className={'bg-blue-500 px-4 py-3 rounded-xl mb-3'} onPress={addProductHandler}>
                 <Text className={'text-center text-white'}>Add Product</Text>
             </TouchableOpacity>
-            <TouchableOpacity className={'bg-gray-500 px-4 py-3 rounded-xl'} onPress={()=> {
+            {/* <TouchableOpacity className={'bg-gray-500 px-4 py-3 rounded-xl'} onPress={()=> {
                 setIsVisible(false)
             }}>
                 <Text className={'text-center text-white'}>Cancel</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
         </View>
     </View>
     </SafeAreaView>

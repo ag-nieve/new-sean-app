@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import AddCategoryModal from "./components/AddCategoryModal";
 import { useEffect, useState } from "react";
@@ -39,6 +39,9 @@ export default function CategoryScreen(props){
                 <FlashList
                 data={categoryIds}
                 renderItem={({ item }) => <View className={'mb-3 rounded-lg shadow  p-5 bg-white'}>
+                    <View className={'flex w-full items-center'}>
+                        <Image className={'w-full h-44 mb-3 rounded-lg'} src={categories[item].image ? categories[item].image : 'https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?format=jpg&quality=90&v=1530129081'} />
+                    </View>
                     <Text className={'text-lg'}>{categories[item] ? categories[item].name : newData.name}</Text>
                     <Text className={'mb-3'}>{categories[item] ? categories[item].description : newData.description}</Text>
                     {/* <View className={'flex'}>

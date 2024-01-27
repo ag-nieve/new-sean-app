@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useEffect, useState } from "react";
-import { Modal, Text, TextInput, View, TouchableOpacity, SafeAreaView } from "react-native";
+import { Modal, Text, TextInput, View, TouchableOpacity, SafeAreaView, Image } from "react-native";
 import { useUserStore } from "../../../zustand_store/auth";
 
 
@@ -102,6 +102,9 @@ export default function SellModal(props){
             </TouchableOpacity>
         </View>
         <View>
+            <View className={'flex w-full items-center'}>
+                <Image className={'w-full h-44 mb-3 rounded-lg'} src={selectedProduct?.image ? selectedProduct?.image : 'https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?format=jpg&quality=90&v=1530129081'} />
+            </View>
             <View className={'flex flex-row justify-between items-center mb-3'}>
             <View className={'bg-green-200 rounded-full w-2/4 py-2 px-3'}>
                 <Text className={'text-center'}>{selectedProduct?.category}</Text>

@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
-import { Modal, Text, TextInput, View, TouchableOpacity, SafeAreaView } from "react-native";
+import { Modal, Text, TextInput, View, TouchableOpacity, SafeAreaView, Image } from "react-native";
 
 
 export default function AddCategoryModal(props){
@@ -8,6 +8,8 @@ export default function AddCategoryModal(props){
     const { isVisible, setIsVisible, setAction, setNewData } = props;
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
+    const [image, setImage] = useState("");
+
     const [isSuccess, setIsSuccess] = useState(false);
     
     const addCategoryHandler = async () => {
@@ -17,6 +19,7 @@ export default function AddCategoryModal(props){
             method: "POST",
             body: JSON.stringify({
                 'name': name,
+                'image': image,
                 'description' : description,
                 'dateTime': new Date()
             })
@@ -31,9 +34,11 @@ export default function AddCategoryModal(props){
 
         setNewData({
             name: name,
-            description: description
+            description: description,
+            image: image
         });
 
+        setImage("");
         setName("");
         setDescription("");
 
@@ -57,6 +62,15 @@ export default function AddCategoryModal(props){
             </TouchableOpacity>
         </View>
         <View>
+            <View className={'flex w-full items-center'}>
+                <Image className={'w-full h-44 mb-3'} src={image ? image : 'https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?format=jpg&quality=90&v=1530129081'} />
+            </View>
+            <TextInput 
+                className={'px-4 py-2 rounded-xl w-full border border-gray-100 mb-3'}
+                placeholder="Category Image" 
+                value={image}
+                onChangeText={setImage}            
+            />
             <TextInput 
                 className={'px-4 py-2 rounded-xl w-full border border-gray-100 mb-3'}
                 placeholder="Category Name" 

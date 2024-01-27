@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import AddProductModal from "./components/AddProductModal";
 import { FlashList } from "@shopify/flash-list";
 import { useUserStore } from "../../zustand_store/auth";
@@ -51,23 +51,26 @@ export default function MyProductScreen(props){
                         <FlashList
                         data={productIds}
                         renderItem={({ item }) => <View className={'mb-3 rounded-lg shadow  p-5 bg-white'}>
-                            <View className={'flex flex-row items-center justify-between mb-3'}>
-                                <Text className={'text-lg'}>{products[item] ? products[item].name : newData.name}</Text>
-                                <Text className={'text-lg'}>Php. {products[item] ? products[item].price : newData.price} / Kilo</Text>
-                            </View>
+                                                        <View className={'flex w-full items-center'}>
+                                                            <Image className={'w-full h-44 mb-3 rounded-lg'} src={products[item] ? products[item]?.image : newData.image ? newData.image : 'https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?format=jpg&quality=90&v=1530129081'} />
+                                                        </View>
+                                                        <View className={'flex flex-row items-center justify-between mb-3'}>
+                                                            <Text className={'text-lg'}>{products[item] ? products[item].name : newData.name}</Text>
+                                                            <Text className={'text-lg'}>Php. {products[item] ? products[item].price : newData.price} / Kilo</Text>
+                                                        </View>
 
-                            <Text className={'mb-3'}>{products[item] ? products[item].description : newData.description}</Text>
-                            
-                                <View className={'flex flex-row justify-between items-center'}>
-                                <View className={'flex w-2/4 py-2 px-2 bg-green-200 rounded-full mb-3'}>
-                                    <Text className={'text-center'}>{products[item] ? products[item].category : newData.category}</Text>
-                                </View>
-                                <Text>Quantity: {products[item] ? products[item].quantity : newData.quantity}</Text>
-                                {/* <TouchableOpacity className={'bg-red-500 rounded-lg py-2 px-4'}>
-                                    <Text className={'text-white text-center'}>Delete</Text>
-                                </TouchableOpacity> */}
-                            </View>
-                        </View>}
+                                                        <Text className={'mb-3'}>{products[item] ? products[item].description : newData.description}</Text>
+                                                        
+                                                            <View className={'flex flex-row justify-between items-center'}>
+                                                            <View className={'flex w-2/4 py-2 px-2 bg-green-200 rounded-full mb-3'}>
+                                                                <Text className={'text-center'}>{products[item] ? products[item].category : newData.category}</Text>
+                                                            </View>
+                                                            <Text>Quantity: {products[item] ? products[item].quantity : newData.quantity}</Text>
+                                                            {/* <TouchableOpacity className={'bg-red-500 rounded-lg py-2 px-4'}>
+                                                                <Text className={'text-white text-center'}>Delete</Text>
+                                                            </TouchableOpacity> */}
+                                                        </View>
+                                                    </View>}
                         estimatedItemSize={200}
                         />
                         : <Text className={'text-center'}>No Data.</Text>

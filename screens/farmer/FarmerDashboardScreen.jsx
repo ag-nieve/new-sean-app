@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
 import { useUserStore } from "../../zustand_store/auth";
 import { FlashList } from "@shopify/flash-list";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -66,21 +66,24 @@ export default function FarmerDashboardScreen(props){
                             console.log(index);
                             if(index <= 2){
                                 return <View className={'mb-3 rounded-lg shadow  p-5 bg-white'}>
-                            <View className={'flex flex-row items-center justify-between mb-3'}>
-                                <Text className={'text-lg'}>{adminProducts[item] ? adminProducts[item].name : newData.name}</Text>
-                                <Text className={'text-lg'}>Php. {adminProducts[item] ? adminProducts[item].price : newData.price} / Kilo</Text>
-                            </View>
+                                            <View className={'flex w-full items-center'}>
+                                                <Image className={'w-full h-44 mb-3 rounded-lg'} src={adminProducts[item].image ? adminProducts[item]?.image : 'https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?format=jpg&quality=90&v=1530129081'} />
+                                            </View>
+                                            <View className={'flex flex-row items-center justify-between mb-3'}>
+                                                <Text className={'text-lg'}>{adminProducts[item] ? adminProducts[item].name : newData.name}</Text>
+                                                <Text className={'text-lg'}>Php. {adminProducts[item] ? adminProducts[item].price : newData.price} / Kilo</Text>
+                                            </View>
 
-                            <Text className={'mb-3'}>{adminProducts[item] ? adminProducts[item].description : newData.description}</Text>
-                            <View className={'flex  w-2/4 py-2 px-2 bg-green-200 rounded-full mb-3'}>
-                                <Text className={'text-center'}>{adminProducts[item] ? adminProducts[item].category : newData.category}</Text>
-                            </View>
-                            <View className={'flex'}>
-                                {/* <TouchableOpacity className={'bg-red-500 rounded-lg py-2 px-4'}>
-                                    <Text className={'text-white text-center'}>Delete</Text>
-                                </TouchableOpacity> */}
-                            </View>
-                        </View>
+                                            <Text className={'mb-3'}>{adminProducts[item] ? adminProducts[item].description : newData.description}</Text>
+                                            <View className={'flex  w-2/4 py-2 px-2 bg-green-200 rounded-full mb-3'}>
+                                                <Text className={'text-center'}>{adminProducts[item] ? adminProducts[item].category : newData.category}</Text>
+                                            </View>
+                                            <View className={'flex'}>
+                                                {/* <TouchableOpacity className={'bg-red-500 rounded-lg py-2 px-4'}>
+                                                    <Text className={'text-white text-center'}>Delete</Text>
+                                                </TouchableOpacity> */}
+                                            </View>
+                                        </View>
                             }
                             
                         }}
